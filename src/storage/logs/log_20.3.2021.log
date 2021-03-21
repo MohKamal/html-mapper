@@ -1,0 +1,25 @@
+11:58 - object(Showcase\Models\Section)#1609 (9) {
+  ["migration"]=>
+  string(7) "Section"
+  ["idDetails":protected]=>
+  array(1) {
+    ["name"]=>
+    string(2) "id"
+  }
+  ["db":protected]=>
+  NULL
+  ["variables"]=>
+  array(0) {
+  }
+  ["id"]=>
+  string(0) ""
+  ["title"]=>
+  NULL
+  ["text"]=>
+  string(0) ""
+  ["created_at"]=>
+  string(0) ""
+  ["updated_at"]=>
+  string(0) ""
+}
+

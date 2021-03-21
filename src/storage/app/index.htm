@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="_Skins_Doc2" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-has-content-body="True" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Advanced Analytics Platform Database">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Analytics ETL Processing</title>
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" />
+        <link href="../../Skins/Fluid/Stylesheets/foundation.6.2.3.css" rel="stylesheet" />
+        <link href="../../Skins/Fluid/Stylesheets/Styles.css" rel="stylesheet" />
+        <link href="../../Skins/Fluid/Stylesheets/Tablet.css" rel="stylesheet" />
+        <link href="../../Skins/Fluid/Stylesheets/Mobile.css" rel="stylesheet" />
+        <link href="../../Resources/Stylesheets/Doc02.css" rel="stylesheet" />
+        <link href="../../../../../css/offline.css" rel="stylesheet" />
+        <style>/*&lt;meta /&gt;*/
+
+.button.send-mail-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/select-skin_1.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.separator-button
+{
+	-pie-background: linear-gradient(#ffffff, #ececec);
+}
+
+.button.skin-change-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/select-skin.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.separator-button
+{
+	-pie-background: linear-gradient(#ffffff, #ececec);
+}
+
+.button.print-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/printer.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.separator-button
+{
+	-pie-background: linear-gradient(#ffffff, #ececec);
+}
+
+.button.expand-all-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/expand.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.separator-button
+{
+	-pie-background: linear-gradient(#ffffff, #ececec);
+}
+
+.button.previous-topic-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/navigate-previous.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.separator-button
+{
+	-pie-background: linear-gradient(#ffffff, #ececec);
+}
+
+.button.next-topic-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/navigate-next.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.button.collapse-all-button
+{
+	-pie-background: url('../../Skins/Default/Stylesheets/Images/collapse.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+}
+
+.needs-pie
+{
+	behavior: url('../../Resources/Scripts/PIE.htc');
+}
+
+</style>
+        <style>
+   
+.feedbackBox{
+    position: absolute;
+    bottom: 0px;
+    right: 40px;
+    width: 150px;
+    height: 40px;
+    background-color: #003e75;
+    text-align: center;
+    padding: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    cursor: pointer;
+}
+
+#contact{
+    color: #fff;
+}
+a.selected {
+  color:white;
+  z-index:100;
+}
+
+.messagepop {
+  background-color:#FFFFFF;
+  border:1px solid #f39200;
+  cursor:default;
+  display:none; 
+  margin-top: 15px;
+  position:absolute;
+  text-align:left;
+  z-index:1001;
+  padding: 0px 0px 0px;
+  right: 40px;
+  bottom: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: solid 10px #f39200;
+  height:610px;
+  width:420px;
+  z-index: 9999;
+  
+
+}
+
+.closebtn {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    top: 5px;
+    position: absolute;
+    right: 15px;
+}
+
+.messagepopheading{
+    padding: 15px;
+    background: #f39200;
+    color: white;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-weight: 700;
+}
+
+.feedbackpop {
+    height: 560px;
+    width: 420px;
+    border: none;
+}
+
+
+@media (min-width: 360px) and (max-width: 640px){
+.messagepop{
+    
+    width: 310px;
+    }
+
+.feedbackpop {
+    height: 560px;
+    width: 310px;
+    border: none;
+}
+}
+
+body.dark-mode {
+  background-color: #201f1f;
+  color: #fff;
+}
+body.dark-mode a {
+  color: #000;
+}
+body.dark-mode button {
+  background-color: #201f1f;
+  color: #000;
+}
+
+body.dark-mode .sidenav-wrapper {
+    background-color: #2d2c2c;
+    border-right: 1px solid white;
+}
+
+body.dark-mode .TableStyle-TemenosTables {
+color:#000;
+}
+
+body.dark-mode nav.title-bar {
+    background-color: #2d2c2c;
+    border-bottom: 1px solid white;
+}
+
+body.dark-mode h1 {
+    color:#f39200;
+}
+
+body.dark-mode h2 {
+    color:#f39200;
+}
+
+body.dark-mode .TableStyle-TemenosTables-Body-Body1{
+color:white;
+}
+
+body.dark-mode .TableStyle-TemenosTables-BodyB-Column1-Body1{
+background:black;
+border: 1px solid #a4acb1;
+}
+
+body.dark-mode .TableStyle-TemenosTables-BodyA-Column1-Body1{
+background:black;
+border: 1px solid #a4acb1;
+}
+
+body.dark-mode .TableStyle-TemenosTables-BodyC-Column1-Body1{
+background:black;
+border: 1px solid #a4acb1;
+}
+
+body.dark-mode .TableStyle-TemenosTables-BodyD-Column1-Body1{
+background:black;
+border: 1px solid #a4acb1;
+}
+
+body.dark-mode .TableStyle-TemenosTables-BodyE-Column1-Body1{
+background:black;
+border: 1px solid #a4acb1;
+}
+
+body.dark-mode .TableStyle-TemenosTables-HeadD-Column1-Header1{
+background:#4F575C;
+}
+
+body.dark-mode .TableStyle-TemenosTables-HeadE-Column1-Header1{
+background:#4F575C;
+}
+
+body.dark-mode .TableStyle-TemenosTables-Body-Body1{
+color:white;
+border:1px solid #a4acb1;
+}
+
+body.dark-mode ul.menu._Skins_SideMenuNT.mc-component {
+    background-color: #201f1f;
+}
+
+body.dark-mode ul.menu._Skins_SideMenuNT.mc-component a {
+    background: #201f1f !important;
+}
+
+body.dark-mode .title-bar-layout a.logo {
+background: transparent url('https://docs.temenos.com/en/Solutions/Core_Banking/AR/Resources/Images/darktemenoslogo.png') no-repeat center center !important;
+}
+
+@media only screen and (max-device-width: 767px){
+body.dark-mode .title-bar-layout a.logo {
+    width: 120px;
+    height: 30px;
+    align-self: center;
+    background: transparent url('https://docs.temenos.com/en/classimax/images/flareimages/temenosdarkmobile.png') no-repeat center center !important;
+    }
+ }
+
+
+@media only screen and (max-device-width: 1278px){
+body.dark-mode .title-bar-layout a.logo {
+    top: 0;
+    margin: 0;
+    display: block;
+    width: 150px;
+    height: 37px;
+    align-self: center;
+    background: transparent url('https://docs.temenos.com/en/classimax/images/flareimages/temenosdarktab.png') no-repeat center center !important;
+}
+}
+
+body.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+body.light-mode a {
+  
+}
+body.light-mode button {
+  background-color: #000;
+  color: #eee;
+}
+
+
+
+    </style>
+        <script src="../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../Resources/Scripts/foundation.6.2.3_custom.js">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js">
+        </script>
+        <script src="../../Resources/Javascript/scripts.js">
+        </script>
+        <script src="../../Resources/Javascript/insight.js">
+        </script>
+        <script src="../../../../../js/analyticsscript.js">
+        </script>
+        <script src="../../Skins/Default/Scripts/TopicToolBar.js">
+        </script>
+    </head>
+    <body id="body" class="">
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-left" id="offCanvas" data-off-canvas="" data-position="left" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-device-width: 1278px)" data-mc-ignore="true">
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <button class="menu-icon" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../../../../../../index.html" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="1" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" placeholder="Search" />
+                                                <div class="search-filter-wrapper">
+                                                    <div class="search-filter">
+                                                        <div class="search-filter-content">
+                                                            <ul>
+                                                                <li>All Files</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <section class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <div class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="body-container" data-mc-content-body="True">
+                                <script>/* <![CDATA[ */
+
+function showBot(){
+	console.log("Hi, in bot");
+	 if($("#chat-box").length){
+           maximizeBot();
+        }else{
+$("body").append(`<div id="chat-box"><div id="chat-ctrl"><div class="minimizeBot" style="" id="" onclick="minimizeBot();"><img src="../../Resources/Images/Assets/minimize.svg" style="width:16px;" /></div><div class="closeBot" style="" id="" onclick="removeBot();"><img src="../../Resources/Images/Assets/close.svg" style="width:16px;" /></div><a onclick="minimizeBot();"><i class="fas fa-window-minimize" /></a><a onclick="removeBot();"><i class="fas fa-times" /></a></div><iframe width="100%" height="100%" src="https://docsbot.azurewebsites.net/" allow="microphone;" frameborder="0" /></div>`);	
+
+}}
+
+function removeBot(){
+	$("#chat-box").remove();
+}
+function minimizeBot(){
+	$("#chat-box").css("height","0");
+	$("body").append(`<div id="chat-max-icon" onclick="maximizeBot();"><a><img src="../../Resources/Images/Assets/activechat.svg" style="width:25px;" /></a><div>Active</div></div>`);
+}
+function maximizeBot(){
+	$("#chat-box").css("height","64vh");
+	$("#chat-max-icon").remove();
+	
+}
+
+
+
+
+
+/* ]]> */</script>
+                                <div class="div_wrapper">
+                                    <div class="topictoolbar">
+                                        <div class="buttons popup-container clearfix topicToolbarProxy _Skins_TopicToolBar mc-component nocontent" style="mc-topic-toolbar-items: ;">
+                                            <div class="button-group-container-left">
+                                                <button class="button needs-pie send-mail-button" onclick="document.location.href=&quot;mailto:?subject=Read this: &quot; + document.title +&quot;&amp;body=Link: &quot; + location.href;">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="send mail" />
+                                                </button>
+                                                <div class="button-separator">
+                                                </div>
+                                                <button class="button needs-pie skin-change-button" onclick="toggleDarkLight() ">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="skin change" />
+                                                </button>
+                                                <div class="button-separator">
+                                                </div>
+                                                <button class="button needs-pie print-button" title="Print">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="print" />
+                                                </button>
+                                                <div class="button-separator">
+                                                </div>
+                                                <button class="button needs-pie expand-all-button" data-state1-class="expand-all-button" data-state2-class="collapse-all-button" data-state2-title="Collapse all" title="Expand all" data-state1-title="Expand all">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="expand all" />
+                                                </button>
+                                                <div class="button-separator">
+                                                </div>
+                                                <button class="button needs-pie previous-topic-button" title="Navigate previous">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="previous topic" />
+                                                </button>
+                                                <div class="button-separator">
+                                                </div>
+                                                <button class="button needs-pie next-topic-button" title="Navigate next">
+                                                    <img src="../../Skins/Default/Stylesheets/Images/transparent.gif" alt="next topic" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="first_div">
+                                        <div class="myrelatedtopics">
+                                            <div class="topicheadname">Related topics:</div>
+                                            <ul class="topics-list">
+                                                <li value="1"><a href="InsightLanding.htm">InsightLanding</a>
+                                                </li>
+                                                <li value="2"><a href="InsightSource.htm">InsightSource</a>
+                                                </li>
+                                                <li value="3"><a href="InsightStaging.htm">InsightStaging</a>
+                                                </li>
+                                                <li value="4"><a href="InsightWarehouse.htm">InsightWarehouse</a>
+                                                </li>
+                                                <li value="5"><a href="InsightETL.htm">InsightETL</a>
+                                                </li>
+                                                <li value="6"><a href="Process Data ExStore.htm">Process Data ExStore</a>
+                                                </li>
+                                                <li value="7"><a href="Platform Configuration and.htm">Platform Configuration and Customization</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h1 id="AnalyticsETLProcessing" data-magellan-target="AnalyticsETLProcessing"><a name="_Toc23841233"></a>Analytics ETL Processing</h1>
+                                        <p>Analytics ETL is processed by means of SQL stored procedures called by SQL agent jobs. The SQL Agent job can be started from any failed steps if needed. Alternatively, Analytics ETL can be executed by calling the SQL stored procedures directly with the same parameters as in the SQL Agent Job. Because of this, the ETL process can be customized for different scenarios as needed, such as calling additional custom source systems as part of the job. </p>
+                                        <h2 id="TechnicalComponents" data-magellan-target="TechnicalComponents"><a name="_Toc23841235"></a>Technical Components</h2>
+                                        <p>The Analytics ETL agent job includes a number of steps that execute stored procedures within the databases of the Advanced Analytics Platform. Below we can find a list of the stored procedure executed in each database.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightETL</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedures in the InsightETL database.</p>
+                                                <h4>dbo.s_MergeUpdateBatchStatus</h4>
+                                                <p class="p_9">This stored procedure, executed at the beginning of Analytics ETL, creates a new batch in the Batch table and will perform in-place updates to the involved Batch records.</p>
+                                                <h4>dbo.s_CreateColumnCalculations</h4>
+                                                <p class="p_9">This stored procedure reads the content of the AttributeCalculations table in InsightETL and, based on the Split, Calculations and Datasets definitions, it creates new columns in the target tables. In Analytics ETL, this stored procedure is directly executed twice, first on the tables imported in the InsightImport database and then on the tables imported into InsightSource. Furthermore, this stored procedure is internally called by the s_InsightStaging_Update stored procedure when Analytics ETL reaches its core steps in the InsightStaging database.</p>
+                                                <h4>dbo.s_CreateRuleGroup</h4>
+                                                <p class="p_9">This stored procedure applies business rules designed through the Rules Engine functionalities of InsightETL on a specific database whose name is specified as input parameter. In Analytics ETL, this stored procedure is directly executed three times, first on the tables imported in the InsightImport database, then on the tables loaded in InsightImport and then on the tables imported into InsightSource. Furthermore, this stored procedure is internally called by the s_InsightStaging_Update stored procedure when Analytics ETL reaches its core steps in the InsightStaging database.</p>
+                                                <h4>dbo.s_PopulateAuditCounts</h4>
+                                                <p class="p_9">This stored procedure performs a count of the records processed within each database involved in ETL processing. It is executed several times during ETL for records count reconciliation between source and target databased. The results of these calculations are stored in the dbo.TableRowCountAudit log table in InsightETL.</p>
+                                                <h4 class="h4_3"><b class="b_1" style="font-style: normal; font-weight: normal;">dbo.s_ColumnStoreIndex_Defragmentation </b>
+                                                </h4>
+                                                <p>Forces all of the rowgroups into the columnstore and then to combine the rowgroups into fewer rowgroups with more rows. The ALTER INDEX REORGANIZE online operation also removes rows that have been marked as deleted from the columnstore index tables. During Analytics ETL, this stored procedure is executed twice for maintence reasons, first within the InsightLanding database and then in the InsightWarehouse.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>EXEC&#160; [dbo].[s_ColumnStoreIndex_Defragmentation]</p>
+                                                <p>&#160;&#160;&#160;&#160;@DatabaseName = N'InsightLanding',</p>
+                                                <p>&#160;&#160;&#160;&#160;@CompressRowGroupsWhenGT = 5000,</p>
+                                                <p>&#160;&#160;&#160;&#160;@MergeRowGroupsWhenLT = 150000,</p>
+                                                <p>&#160;&#160;&#160;&#160;@DeletedTotalRowPercentage = 10,</p>
+                                                <p>&#160;&#160;&#160;&#160;@DeletedSegmentsRowPercentage = 20,</p>
+                                                <p>&#160;&#160;&#160;&#160;@EmptySegmentsAllowed = 0,</p>
+                                                <p>&#160;&#160;&#160;&#160;@ExecOrPrint = N'EXEC',</p>
+                                                <p>&#160;&#160;&#160;&#160;@BatchNum = null</p>
+                                                <h4>dbo.s_SetBatchStatusFinished</h4>
+                                                <p class="p_9">This stored procedure marks the completion of any batch executed, either ‘CompletedWithError’ if there are error(s) or ‘CompletedSuccessfully’ when no error is encountered. It executed at the end of the Analytics ETL agent job.</p>
+                                                <p>Furthrmore, InsightETL is used to set the current date through a SQL statement similar to the one below.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>declare @CurrentETLDate date = (select max(mis_date) from InsightImport.dbo.DATES);</p>
+                                                <p>UPDATE CurrentDate set BusinessDate =&#160; @CurrentETLDate;</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightImport</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedures in the InsightImport database.</p>
+                                                <h4 class="h4_5">Insight.s_ImportBaseTables</h4>
+                                                <p>This procedure manages the control of the process to Bulk Insert from CSV files to SQL in parallel with DQI (Data Quality Import) or/and DPI (Data Profiler Import).</p>
+                                                <h4 class="h4_5">Insight.s_ImportSubTables</h4>
+                                                <p>This procedure parses multi-values, sub-values, and local reference fields creating the associated ‘sub’ tables.</p>
+                                                <h4>Insight.s_T24ConsolKeys_add</h4>
+                                                <p class="p_9">This procedure parses Consolidation keys for GL-related tables like RE_CONSOL_SPEC_ENTRY and any CRF file. It execues the following steps in Analytics ETL:</p>
+                                                <ol start="1" class="ol_6">
+                                                    <li class="ListParagraph_14" value="1">
+                                                        <p class="ListParagraph_14">Updates Batch log</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">EXEC [InsightETL].dbo.s_MergeUpdateBatchStatus null, null, null</p>
+                                                <ol start="2" class="ol_6">
+                                                    <li class="ListParagraph_14" value="2">
+                                                        <p class="ListParagraph_14"> Runs the Import. </p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [Insight].[s_Import_Control] @PathName = 'E:\InsightImport', @TableName = 'All', @ReCreateTables = 0, @TableType = 'Regular', @SystemTablesExist = 0, @BatchNum = null, @TotalThreads = null;</p>
+                                                <ol start="3" class="ol_6">
+                                                    <li class="ListParagraph_14" value="3">
+                                                        <p class="ListParagraph_14">Checks imported tables against HASH_TOTAL</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [InsightImport].[Insight].[s_ImportDataReportErrors] @TableName = 'All', @BatchNum = null;</p>
+                                                <ol start="4" class="ol_6">
+                                                    <li class="ListParagraph_14" value="4">
+                                                        <p class="ListParagraph_14">Performs Local reference fields parsing</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [Insight].[s_Import_Control] @PathName = 'E:\InsightImport', @TableName = 'All', @ReCreateTables = 0, @TableType = 'localref', @SystemTablesExist = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                <ol start="5" class="ol_6">
+                                                    <li class="ListParagraph_14" value="5">
+                                                        <p class="ListParagraph_14">Performs Multi-value parsing</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [Insight].[s_Import_Control] @PathName = 'E:\InsightImport', @TableName = 'All', @ReCreateTables = 0, @TableType = 'mv', @SystemTablesExist = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                <ol start="6" class="ol_6">
+                                                    <li class="ListParagraph_14" value="6">
+                                                        <p class="ListParagraph_14">Performs Multi-value sub-value parsing</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [Insight].[s_Import_Control] @PathName = 'E:\InsightImport', @TableName = 'All', @ReCreateTables = 0, @TableType = 'mvsv', @SystemTablesExist = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                <ol start="7" class="ol_6">
+                                                    <li class="ListParagraph_14" value="7">
+                                                        <p class="ListParagraph_14">Performs sub-value parsing for local reference fields</p>
+                                                    </li>
+                                                </ol>
+                                                <p class="ListParagraph_4">Exec [Insight].[s_Import_Control] @PathName = 'E:\InsightImport', @TableName = 'All', @ReCreateTables = 0, @TableType = 'lrsv', @SystemTablesExist = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                <ol start="8" class="ol_6">
+                                                    <li class="ListParagraph_14" value="8">
+                                                        <p class="ListParagraph_14">Parses consolidation keys for GL</p>
+                                                    </li>
+                                                    <li class="ListParagraph_14" value="9">
+                                                        <p class="ListParagraph_14">exec [Insight].[s_T24ConsolKeys_Add] @TableName = 'All', @BatchNum = null;</p>
+                                                    </li>
+                                                </ol>
+                                                <h4>Insight.s_BuildCOA</h4>
+                                                <p>This procedure builds the Chart of Accounts table.</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightLanding</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedure in the InsightLanding database. </p>
+                                                <h4>dbo<span class="span_52">.</span>s_InsightLandingTable_CSI_Table_Update</h4>
+                                                <p>Loads data into InsightLanding’s columnstore index tables.This procedure can be updated or run multiple times depending the source systems considered.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>declare @CurrentETLDate date = (select max(BusinessDate) from InsightETL.dbo.CurrentDate);</p>
+                                                <p>EXEC dbo.s_InsightLanding_CSI_Table_Update @SourceName = 'BS', @BSDate = @CurrentETLDate, @UserId = 'dbo', @CreateRowBaseIndex = 0, @DataCompression = 'COLUMNSTORE', @UpdateTableSchema = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightSource</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedure in the InsightSource database.</p>
+                                                <h4>dbo<span class="span_52">.</span>s_InsightSource_CSI_Update</h4>
+                                                <p>Loads data from InsightLanding columnstore index tables into the InsightSource database. This procedure can be updated or run multiple times depending the source systems considered.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>declare @CurrentETLDate date = (select max (BusinessDate) from InsightETL.dbo.CurrentDate);</p>
+                                                <p>EXEC dbo.s_InsightSource_CSI_Update @sources = 'BS', @BSDate = @CurrentETLDate, @BatchNum = null, @TotalThreads = null;</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightStaging</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedures in the InsightStaging database.</p>
+                                                <h4 class="h4_7">dbo<span class="span_52">.</span>s_InsightStaging_Update (Extract)</h4>
+                                                <p>Extracts data into Staging Tables.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p class="p_17">EXEC dbo.s_InsightStaging_Update @ExecuteExtractSteps = 1, @ExecuteTransformLoadSteps = 0, @BatchNum = null, @TotalThreads = null; </p>
+                                                <h4 class="h4_7">dbo<span class="span_52">.</span>s_InsightStaging_Update (Transform)</h4>
+                                                <p>Transforms data into Dim and Facts and Loads InsightWarehouse</p>
+                                                <p class="p_23">Example:</p>
+                                                <p class="p_23">EXEC dbo.s_InsightStaging_Update @ExecuteExtractSteps = 0, @ExecuteTransformLoadSteps = 1, @BatchNum = null, @TotalThreads = null; </p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />InsightWarehouse</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The Analytics ETL&#160;agent job executes the following stored procedures in the InsightWarehouse database.</p>
+                                                <h4>sp_updatestats</h4>
+                                                <p>Updates Analytics ETL statistics.</p>
+                                                <h4 class="h4_8">dbo.s_BusinessDate_Enable</h4>
+                                                <p>Enables the business date.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>Declare @date as smalldatetime = (select&#160; MAX(BusinessDate) from InsightStaging.dbo.sourceDate ); </p>
+                                                <p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;EXEC dbo.s_BusinessDate_Enable @Date=@date, @Reset=null, @BatchNum=null</p>
+                                            </div>
+                                        </div>
+                                        <h2 id="SQLAgentJobsStructure" data-magellan-target="SQLAgentJobsStructure">SQL Agent Jobs Structure</h2>
+                                        <p>The Analytics ETL job runs the above-described stored procedures within the following steps.</p>
+                                        <table class="table_2">
+                                            <col class="col_109" />
+                                            <col class="col_110" />
+                                            <tr>
+                                                <td class="td_25">
+                                                    <p class="p_41">Step</p>
+                                                </td>
+                                                <td class="td_26">
+                                                    <p class="p_42">Description (SQL Run)</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Create a new Batch ID for the current ETL run</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC [InsightETL].dbo.s_MergeUpdateBatchStatus null, null, null</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Insight Base Tables</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport].[Insight].[s_ImportBaseTables] @CsvDir = 'E:\InsightImport', @TableName = 'All', @SystemTablesExist = 0, @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Local Ref Parsing</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport].[Insight].[s_ImportSubTables] @TableName = 'All', @TableType = 'LocalRef', @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Multi-value Parsing</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport].[Insight].[s_ImportSubTables] @TableName = 'All', @TableType = 'MV', @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Multi-value Sub-value Parsing</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport].[Insight].[s_ImportSubTables] @TableName = 'All', @TableType = 'MVSV', @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Local Ref Sub-value Parsing</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport]. [Insight].[s_ImportSubTables] @TableName = 'All', @TableType = 'LRSV', @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Parsing Consol Keys</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Exec [InsightImport].[Insight].[s_T24ConsolKeys_Add] @TableName = 'All', @BatchNum = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Build COA</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">exec [InsightImport].[Insight].[s_BuildCOA]</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Insight Attributes Calculations-Import</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">exec s_CreateColumnCalculations 'InsightImport','All','dbo','All',1</p>
+                                                    <p class="p_7">exec s_CreateColumnCalculations 'InsightImport','All','dbo','All',2</p>
+                                                    <p class="p_7">exec s_CreateIndexes 'All','InsightImport'</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Create InsightImport Rules</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">declare @CurrentETLDate date = </p>
+                                                    <p class="p_7">(select max(mis_date) from InsightImport.dbo.DATES);</p>
+                                                    <p class="p_7">--InsightImport Rules</p>
+                                                    <p class="p_7">EXEC&#160;&#160;&#160;&#160;[InsightETL.[ [dbo].[s_CreateRuleGroup]</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@DatabaseName = N'InsightImport',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@TableName = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@SchemaName = N'all', --not hooked up -- will be all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionPhase = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionStep = 0, --all steps</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BusinessDate = @CurrentETLDate,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@IsPersisted = 2,--all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@RuleDefinitionId = null,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BatchNum = NULL,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@StagingEventLogId = null;</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;----------------------</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Setup Current ETL Data</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">[USE InsightETL]</p>
+                                                    <p class="p_7">declare @CurrentETLDate date = (select max(mis_date) from InsightImport.dbo.DATES);</p>
+                                                    <p class="p_7">UPDATECurrentDate set BusinessDate =&#160; @CurrentETLDate;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">InsightLanding CSI BS Update</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">declare @CurrentETLDate date = (select max(BusinessDate) from InsightETL.dbo.CurrentDate);</p>
+                                                    <p class="p_7">&#160;</p>
+                                                    <p class="p_7">EXEC [InsightLanding].dbo.s_InsightLanding_CSI_Table_Update @SourceName = 'BS', @BSDate = @CurrentETLDate, @UserId = 'dbo', @CreateRowBaseIndex = 0, @DataCompression = 'COLUMNSTORE', @UpdateTableSchema = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">InsightLanding CSI Defragmentation</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC&#160; [InsightETL].[dbo].[s_ColumnStoreIndex_Defragmentation]</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DatabaseName = N'InsightLanding',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@CompressRowGroupsWhenGT = 5000,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@MergeRowGroupsWhenLT = 150000,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DeletedTotalRowPercentage = 10,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DeletedSegmentsRowPercentage = 20,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@EmptySegmentsAllowed = 0,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@ExecOrPrint = N'EXEC',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@BatchNum = null</p>
+                                                    <p class="p_7">&#160;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Create InsightLanding Rules</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">declare @CurrentETLDate date = </p>
+                                                    <p class="p_7">(select max(mis_date) from InsightImport.dbo.DATES);</p>
+                                                    <p class="p_7">--InsightImport Rules</p>
+                                                    <p class="p_7">EXEC&#160;&#160;&#160;&#160;[InsightETL.[ [dbo].[s_CreateRuleGroup]</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@DatabaseName = N'InsightLanding',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@TableName = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@SchemaName = N'all', --not hooked up -- will be all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionPhase = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionStep = 0, --all steps</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BusinessDate = @CurrentETLDate,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@IsPersisted = 2,--all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@RuleDefinitionId = null,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BatchNum = NULL,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@StagingEventLogId = null;</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;----------------------</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Insight Source Update</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Declare @CurrentETLDate date = (select max (BusinessDate) from InsightETL.dbo.CurrentDate);</p>
+                                                    <p class="p_7">&#160;</p>
+                                                    <p class="p_7">EXEC [InsightSource].dbo.s_InsightSource_CSI_Update @sources = 'BS', @BSDate = @CurrentETLDate, @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Insight Attributes Calculations-Source</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">[USE InsightETL]</p>
+                                                    <p class="p_7">exec s_CreateColumnCalculations 'InsightImport','All','dbo','All',1</p>
+                                                    <p class="p_7">exec s_CreateColumnCalculations 'InsightImport','All','dbo','All',2</p>
+                                                    <p class="p_7">exec s_CreateIndexes 'All','InsightSource'</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Create InsightSource Rules</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">declare @CurrentETLDate date = </p>
+                                                    <p class="p_7">(select max(mis_date) from InsightImport.dbo.DATES);</p>
+                                                    <p class="p_7">--InsightImport Rules</p>
+                                                    <p class="p_7">EXEC&#160;&#160;&#160;&#160;[InsightETL.[ [dbo].[s_CreateRuleGroup]</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@DatabaseName = N'InsightSource',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@TableName = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@SchemaName = N'all', --not hooked up -- will be all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionPhase = N'all',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@ExecutionStep = 0, --all steps</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BusinessDate = @CurrentETLDate,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@IsPersisted = 2,--all</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@RuleDefinitionId = null,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@BatchNum = NULL,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@StagingEventLogId = null;</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;----------------------</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">InsightStaging Update – Extract</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC [InsightStaging].dbo.s_InsightStaging_Update @ExecuteExtractSteps = 1, @ExecuteTransformLoadSteps = 0, @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">InsightStaging Update – Transform/ Load</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC [InsightStaging].dbo.s_InsightStaging_Update @ExecuteExtractSteps = 0, @ExecuteTransformLoadSteps = 1, @BatchNum = null, @TotalThreads = null;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Update Stats on SW</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC sp_updatestats</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Enabling Business Date</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">[USE InsightWarehouse]</p>
+                                                    <p class="p_7">declare @date as smalldatetime = (select&#160; MAX(BusinessDate) from InsightStaging.dbo.sourceDate ); </p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;EXEC dbo.s_BusinessDate_Enable @Date=@date, @Reset=null, @BatchNum=null</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Set Completion of the Current ETL Batch</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC InsightETL.dbo.s_SetBatchStatusFinished;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">InsightWarehuse CSI Defragmentation</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC&#160; [InsightETL].[dbo].[s_ColumnStoreIndex_Defragmentation]</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DatabaseName = N'InsightWarehouse',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@CompressRowGroupsWhenGT = 5000,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@MergeRowGroupsWhenLT = 150000,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DeletedTotalRowPercentage = 10,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@DeletedSegmentsRowPercentage = 20,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@EmptySegmentsAllowed = 0,</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@ExecOrPrint = N'EXEC',</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;@BatchNum = null</p>
+                                                    <p class="p_7">&#160;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Process InsightWarehouseOLAP Database</p>
+                                                    <p class="p_43">(only available if at least one Analytics Content Pack is deployed)</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">See Process Analytics Cubes chapter.</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">Refresh KPI Cache</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">Declare @KPICacheRefresh Nvarchar(50)</p>
+                                                    <p class="p_7">&#160;&#160;&#160;&#160;</p>
+                                                    <p class="p_7">SELECT @KPICacheRefresh = [Value]</p>
+                                                    <p class="p_7">FROM [InsightWarehouse].[dbo].[DimSystemParameters]</p>
+                                                    <p class="p_7">Where [Type] = 'Application' and [Name] = 'KPI Cache Refresh' and Active = 1</p>
+                                                    <p class="p_7">&#160;</p>
+                                                    <p class="p_7">IF @KPICacheRefresh = 'Enabled'</p>
+                                                    <p class="p_7">EXEC msdb.dbo.sp_start_job @job_name = 'KPI Cache Maintenance'</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td_27">
+                                                    <p class="p_43">In case the Current ETL Batch ended with Error, Report and Exit</p>
+                                                </td>
+                                                <td class="td_24">
+                                                    <p class="p_7">EXEC InsightETL.dbo.s_SetBatchStatusFinished;</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />Process Analytics Cubes</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>If at least one Analytics Content Pack is deployed within the Advanced Analytics Platform, the Analytics ETL agent job will contain a step to process all Multidimensional Cubes are processed using.</p>
+                                                <p class="p_23">Example:</p>
+                                                <p>Declare @BusinessDate date,</p>
+                                                <p>@CommandText Nvarchar(200),</p>
+                                                <p>@CubeProcessType Nvarchar(50)</p>
+                                                <p>SELECT @CubeProcessType = case when [Value] is null or [Value] = '' Then</p>
+                                                <p>'NoProcess' Else</p>
+                                                <p>[Value] End</p>
+                                                <p>FROM [InsightWarehouse].[dbo].[DimSystemParameters]</p>
+                                                <p>Where [Type] = 'Cube' and [Name] = 'ProcessType' and Active = 1</p>
+                                                <p>SELECT case when @CubeProcessType is null or @CubeProcessType = '' Then</p>
+                                                <p>'NoProcess' Else</p>
+                                                <p>[Value] End</p>
+                                                <p>FROM [InsightWarehouse].[dbo].[DimSystemParameters]</p>
+                                                <p>Where [Type] = 'Cube' and [Name] = 'ProcessType' and Active = 1</p>
+                                                <p>--Print @CubeProcessType</p>
+                                                <p>--Print @BusinessDate</p>
+                                                <p>--Testing</p>
+                                                <p>--Set @CubeProcessType = 'ProcessFull'</p>
+                                                <p>--Set @CubeProcessType = 'NoProcess'</p>
+                                                <p>----------------------------------------</p>
+                                                <p>If @CubeProcessType = 'ProcessByPartition'</p>
+                                                <p>BEGIN</p>
+                                                <p>Print 'Process by Partition'</p>
+                                                <p>EXEC msdb..sp_start_job @job_name= 'Process Insight Cubes - By Partition', @step_name = 'Update Process Date'</p>
+                                                <p>END</p>
+                                                <p>-----------------------------------</p>
+                                                <p>If @CubeProcessType = 'ProcessFull'</p>
+                                                <p>BEGIN</p>
+                                                <p>Print 'Process full'</p>
+                                                <p>EXEC msdb..sp_start_job @job_name= 'Process Insight Cubes - By Partition', @step_name = 'Full Process'</p>
+                                                <p>END</p>
+                                                <p>-----------------------------------</p>
+                                                <p>If @CubeProcessType = 'NoProcess'</p>
+                                                <p>BEGIN</p>
+                                                <p>Print 'No Process'</p>
+                                                <p>END</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />Scheduling Jobs</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>Agent jobs can be scheduled. Double Click on the Agent Job record in SQL&#160;Server Management Studio and select Schedules to do so.</p>
+                                            </div>
+                                        </div>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" />Log File Viewer</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p>The log file viewer can be used to view the history of job runs. In SQL Server Management Studio, right click on Jobs under SQL Server Agent, select “View History” from the right click menu.</p>
+                                                <p class="p_76"><a class="MCPopupThumbnailLink MCPopupThumbnailHover" href="../../Resources/Images/Advanced Analytics Platform Technical Guide_v6_for_Flare/Analytics ETL Processing.png"><img class="MCPopupThumbnail img imgcontent" data-mc-width="1070" data-mc-height="293" src="../../Resources/Images/Advanced Analytics Platform Technical Guide_v6_for_Flare/Analytics ETL Processing_thumb_0_48.png" tabindex="" /></a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="second_div"><a href="../../../index.htm"><div class="" style="cursor:pointer;float: right;padding-top: 0;margin-top: 0;background: #003e75;color: white;padding: 7px;font-size: 12px;margin-bottom: 12px;"><img src="../../Resources/Images/Assets/homefamily.svg" style="width: 20px;margin: -5px 5px 0px 2px;" />BACK</div></a>
+                                        <div class="fixedsides">
+                                            <hr style="color: 5px solid #005294;" width="100%" size="0" align="center" />
+                                            <p>In this topic</p>
+                                            <ul data-magellan="" data-animation-duration="250" data-active-class="selected" data-scroll-container=".body-container" data-scroll-container-on="only screen and (min-width: 1279px)" class="nocontent menu _Skins_SideMenuNT mc-component">
+                                                <li><a href="#AnalyticsETLProcessing">Analytics ETL Processing</a>
+                                                </li>
+                                                <ul>
+                                                    <li><a href="#TechnicalComponents">Technical Components</a>
+                                                    </li>
+                                                    <li><a href="#SQLAgentJobsStructure">SQL Agent Jobs Structure</a>
+                                                    </li>
+                                                </ul>
+                                            </ul>
+                                            <hr style="color: 5px solid #005294;" width="100%" size="0" align="center" />
+                                        </div>
+                                        <div id="snav" class="en">
+                                            <ul>
+                                                <li value="1"> <a href="https://docs.temenos.com/downloads.html"> <img src="../../Resources/Images/Assets/download.svg" style="width: 25px;" /><span>Downloads</span> </a> </li>
+                                                <div class="myhrLine">
+                                                </div>
+                                                <li value="2"> <a href="#"> <img src="../../Resources/Images/Assets/links.svg" style="width: 25px;" /> </a><a href="http://gva2flare.temenosgroup.com/doc/" target="_blank"> <span style="top:-48px">Previous Docs</span> </a></li>
+                                                <div class="myhrLine">
+                                                </div>
+                                                <li value="3"> <a href="#" id="hideshow12" onclick="showBot();"> <img src="../../Resources/Images/Assets/help.svg" style="width: 25px;" /> </a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="messagepop pop" id="messagepop">
+                                    <div class="messagepopheading">Feedback</div><iframe src="/mailer/index.html" class="feedbackpop"></iframe>
+                                    <div class="closebtn" id="closebtn" onclick="myCloseFunction()">
+                                        <div class="close">x</div>
+                                    </div>
+                                </div>
+                                <div class="feedbackBox" id="feedbackBox" onclick="myOpenFunction()">
+                                    <img src="../../Resources/Images/Assets/envelope-open-regular.svg" style="width: 20px;margin: -5px 10px 0px 2px;" /><a class="contact" id="contact">Feedback</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section><a data-close="true"></a>
+                </div>
+            </div>
+            <script>/* <![CDATA[ */$(document).foundation();/* ]]> */</script>
+        </div>
+    </body>
+</html>
