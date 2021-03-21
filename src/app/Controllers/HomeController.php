@@ -18,6 +18,22 @@ namespace Showcase\Controllers{
          * Return the welcome view
          */
         static function Index(){
+            /**
+             * Concept:
+             * 
+             * The mapper is used to to map html elements to your objects
+             * Example :
+             * Section has title and text | Section [title, text]
+             * and we want the h1 element text to be saved to the title property and all the p elements text to be saved to the text property
+             * so we tell the mapper : 
+             *             1) <h1> ======> Section->title
+             *             2) all the <p> ======> Section->text
+             * This figure in code goes like this : 
+             *             1) Mapper::html($html)->class("\Showcase\Models\Section")->proprety("title")->query("h1")->first();
+             *             2) Mapper::html($html)->class("\Showcase\Models\Section")->proprety("text")->concatenate()->query("p")->get();
+             * now the mapper will return an object section with a valid title and a text
+             */
+
             // Get the html string from the file index.htm situeted in storage/app/index.htm
             $html = Storage::folder('app')->get('index.htm');
             // Create new object section from Model Section
