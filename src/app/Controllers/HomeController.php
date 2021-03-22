@@ -29,9 +29,10 @@ namespace Showcase\Controllers{
              *             1) <h1> ======> Section->title
              *             2) all the <p> ======> Section->text
              * This figure in code goes like this : 
-             *             1) Mapper::html($html)->class("\Showcase\Models\Section")->proprety("title")->query("h1")->first();
-             *             2) Mapper::html($html)->class("\Showcase\Models\Section")->proprety("text")->concatenate()->query("p")->get();
-             * now the mapper will return an object section with a valid title and a text
+             *             Mapper::html($html)->queries(
+             *                         1) ['query' => 'h1', 'property' => 'title', 'object' => $section, 'return' => false],
+             *                         2) ['query' => 'p', 'property' => 'text', 'concatenate' => true, 'object' => $section])->first();
+             * now the mapper will return an array with one object section with a valid title and a text
              */
 
             // Get the html string from the file index.htm situeted in storage/app/index.htm
@@ -39,9 +40,13 @@ namespace Showcase\Controllers{
             // Create new object section from Model Section
             $section = new Section();
             // Get the value of h1 in html and save it into the section title $section->title, first() is used to get the first h1 text
-            $section = Mapper::html($html)->object($section)->proprety("title")->query("h1")->first();
-            // Get the value of every p element in the page, and save it to text $section->text and concetenate all the p texts to on preperties, get() get all p elements not only one
-            $section = Mapper::html($html)->object($section)->proprety("text")->concatenate()->query("p")->get();
+            $section = Mapper::html($html)->queries(
+                [
+                    ['query' => 'h1', 'property' => 'title', 'object' => $section, 'return' => false],
+                    ['query' => 'p', 'property' => 'text', 'concatenate' => true, 'object' => $section]
+                ]
+            )->map();
+            Log::var_dump($section); // See storage/logs/
             /**
              * Mapper - docs
              * 
@@ -50,14 +55,15 @@ namespace Showcase\Controllers{
              *  Mapper::html("<h1>mm</h1>");
              * 
              * functions : 
-             *  object : set an existing object to the mapper
-             *  arrayOfObjects : set an array of objects to the mapper, its like the object function but with a list of objects
-             *  class : give the mapper a class path to init object from it, example : Mapper::html($html)->class("\Showcase\Models\Section")
-             *  property : the property where the value gonna be saved, example : Mapper::html($html)->class("\Showcase\Models\Section")->property("title")
-             *  query : a simple_html_dom query to get the text of an element, for more details see : https://simplehtmldom.sourceforge.io/manual.htm
-             *  concatenate : if you want to get multiple elements text and save it into one property of one object, use this function, example : Mapper::html($html)->class("\Showcase\Models\Section")->property("title")->concatenate()
-             *  first : get the first html element
-             *  get : an array of objects for the array of elements found
+             *  queries : set conditions and objects and queries
+             *  map : execute the queries and return an array
+             * 
+             * queries keys : 
+             *  object: specify the object to save the html text to
+             *  property: the property where to save the data
+             *  query: simple_html_dom query, for more check manual => https://simplehtmldom.sourceforge.io/manual.htm
+             *  return: if you don't the object to be included in the returned array, set this to false, it's true by default
+             *  concatenate: if you want to concatenate all the results in one property, set this to true, it's false by default
              * 
              */
             return self::response()->view('App/welcome');

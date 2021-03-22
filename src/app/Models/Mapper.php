@@ -2,16 +2,15 @@
 namespace  Showcase\Models{
     require_once __DIR__ . '/simple_html_dom.php';
 
-    use \Showcase\Framework\Database\Models\BaseModel;
     use \Exception;
     use \Showcase\Framework\IO\Debug\Log;
     
-    class Mapper extends BaseModel
+    class Mapper
     {
 
         protected $_html;
-        protected $_obj;
         protected $_list_obj;
+        protected $_conditions;
 
         protected $_one_object;
         protected $_list_of_objects;
@@ -21,8 +20,6 @@ namespace  Showcase\Models{
          * Init the model
          */
         public function __construct(){
-            $this->migration = 'Mapper';
-            BaseModel::__construct();
             $this->_list_obj = [];
             $this->_one_object = false;
             $this->_list_of_objects = false;
@@ -35,85 +32,34 @@ namespace  Showcase\Models{
             return $mapper;
         }
 
-        public function class($class) {
-            $this->class = $class;
+        public function queries($queries) {
+            $this->_conditions = $queries;
             return $this;
         }
 
-        public function proprety($property) {
-            $this->property = $property;
-            return $this;
-        }
-
-        public function query($query) {
-            $this->query = $query;
-            return $this;
-        }
-
-        public function object($obj) {
-            $this->_obj = $obj;
-            $this->_one_object = true;
-            return $this;
-        }
-
-        public function arrayOfObjects($array) {
-            $this->_list_obj = $array;
-            $this->_list_of_objects = true;
-            return $this;
-        }
-
-        public function concatenate() {
-            $this->_concatenate = true;
-            return $this;
-        }
-
-        public function first() {
-            if(is_null($this->_obj))
-                $this->_obj = new $this->class;
-            $results = $this->_html->find($this->query);
-            if(is_array($results))
-                $this->_obj->{$this->property} = $results[0]->plaintext;
-            else
-                $this->_obj->{$this->property} = $results->plaintext;
-
-            return $this->_obj;
-        }
-
-        public function get() {
-            $list = [];
-            $results = $this->_html->find($this->query);
-            if(is_null($this->_obj))
-                $this->_obj = new $this->class;
-            if (!is_array($results)) {
-                $this->_obj->{$this->property} = $results[0]->plaintext;
-                $list[] = $this->_obj;
-            } else {
-                $index = 0;
-                foreach ($results as $res) {
-                    $obj = null;
-                    if ($this->_concatenate) {
-                        if(!is_null($this->_obj)) {
-                            $this->_obj->{$this->property} .= $res->plaintext;
+        public function map() {
+            $list_objs = [];
+            foreach($this->_conditions as $condition) {
+                $results = $this->_html->find($condition['query']);
+                if (is_array($results)) {
+                    $concat = key_exists('concatenate', $condition) ? $condition['concatenate'] : false;
+                    if (filter_var($concat, FILTER_VALIDATE_BOOLEAN)) {
+                        foreach ($results as $res) {
+                            $condition['object']->{$condition['property']} .= $res->plaintext;
                         }
-                    } else if($this->_list_of_objects) {
-                        $this->_list_obj[$index]->{$this->property} = $res->plaintext;
-                        $index++;
                     } else {
-                        $obj = new $this->class;
-                        if ($this->_concatenate) {
-                            $obj->{$this->property} = $res->plaintext;
-                        }
+                        $condition['object']->{$condition['property']} = $results[0]->plaintext;
                     }
-                    $list[] = $obj;
                 }
+                else
+                    $condition['object']->{$condition['property']} = $results->plaintext;
 
-                if ($this->_concatenate) {
-                    if(!is_null($this->_obj))
-                        return $this->_obj;
-                }
+                $return = key_exists('return', $condition) ? $condition['return'] : true;
+                if(filter_var($return, FILTER_VALIDATE_BOOLEAN))
+                    $list_objs[] = $condition['object'];
             }
 
-            return $list;
+            return $list_objs;
         }
 
     }
