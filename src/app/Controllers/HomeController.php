@@ -42,11 +42,12 @@ namespace Showcase\Controllers{
             // Get the value of h1 in html and save it into the section title $section->title, first() is used to get the first h1 text
             $section = Mapper::html($html)->queries(
                 [
-                    ['query' => 'h1', 'property' => 'title', 'object' => $section, 'return' => false],
-                    ['query' => 'p', 'property' => 'text', 'concatenate' => true, 'object' => $section]
+                    ['query' => 'h1', 'property' => 'title', 'object' => $section , 'return' => false],
+                    ['query' => 'div[class=MCDropDownBody]', 'property' => 'text', 'object' => $section]
                 ]
-            )->map();
+            )->first();
             Log::var_dump($section); // See storage/logs/
+
             /**
              * Mapper - docs
              * 
@@ -56,7 +57,8 @@ namespace Showcase\Controllers{
              * 
              * functions : 
              *  queries : set conditions and objects and queries
-             *  map : execute the queries and return an array
+             *  first : execute the queries and return an array and get first result
+             *  get: execute tje queries and return an array with all the results
              * 
              * queries keys : 
              *  object: specify the object to save the html text to
