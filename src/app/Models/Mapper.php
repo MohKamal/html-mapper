@@ -37,7 +37,7 @@ namespace  Showcase\Models{
                 foreach($this->_conditions['classes'] as $class) {
                     $_class = $class['name'];
                     $obj = new $_class;
-                    foreach($class['elements']['queries'] as $query) {
+                    foreach($class['options']['queries'] as $query) {
                         if(is_array($query)) {
                             $results = $_html->find($query['query']);
                             if($results) {
@@ -61,15 +61,15 @@ namespace  Showcase\Models{
                                         $obj->{$query['property']} .= $res->plaintext;
                                     }
 
-                                    if(key_exists('reference_to', $class['elements']))
+                                    if(key_exists('reference_to', $class['options']))
                                     {
-                                        if (filter_var($class['elements']['reference_to'], FILTER_VALIDATE_BOOLEAN)) {
+                                        if (filter_var($class['options']['reference_to'], FILTER_VALIDATE_BOOLEAN)) {
                                             $references = ['name' => $_class, 'object' => $obj];
                                         }
                                     }
 
-                                    if(key_exists('reference_from', $class['elements'])){
-                                        $element = $class['elements']['reference_from'];
+                                    if(key_exists('reference_from', $class['options'])){
+                                        $element = $class['options']['reference_from'];
                                         /*$reference = array_filter($references, function($arr) use ($element) {
                                             return $arr['name'] == $element['name'];
                                         });*/

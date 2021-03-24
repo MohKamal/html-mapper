@@ -44,7 +44,7 @@ namespace Showcase\Controllers{
                     'classes' => [
                                 [
                                     'name' => '\Showcase\Models\Section',
-                                    'elements' => [
+                                    'options' => [
                                         'queries' => [
                                             ['query' => 'h4', 'property' => 'title']
                                         ],
@@ -53,7 +53,7 @@ namespace Showcase\Controllers{
                                 ],
                                 [
                                     'name' => '\Showcase\Models\Chapter',
-                                    'elements' => [
+                                    'options' => [
                                         'queries' => [
                                             ['query' => 'p', 'property' => 'text']
                                         ],
@@ -83,10 +83,12 @@ namespace Showcase\Controllers{
              * queries keys : 
              *  classes: define all the objects classes and mapping details
              *  property: the property where to save the data
+             *  name: full namespace with the class name
+             *  options: options for the class
              *  query: simple_html_dom query, for more check manual => https://simplehtmldom.sourceforge.io/manual.htm
-             *  return: if you don't the object to be included in the returned array, set this to false, it's true by default
              *  concatenate: if you want to concatenate all the results in one property, set this to true, it's false by default
-             * 
+             *  reference_to: this is in the options, if you want another object to reference to this object, set this to true
+             *  reference_from: this is in the options, if you want to reference this object to another object set, the "name" of the other object (full namespace), this object "property" and the "reference_property" the other object property
              */
             return self::response()->view('App/welcome');
         }
