@@ -37,16 +37,37 @@ namespace Showcase\Controllers{
 
             // Get the html string from the file index.htm situeted in storage/app/index.htm
             $html = Storage::folder('app')->get('index.htm');
-            // Create new object section from Model Section
-            $section = new Section();
             // Get the value of h1 in html and save it into the section title $section->title, first() is used to get the first h1 text
-            $section = Mapper::html($html)->queries(
+            $list = Mapper::html($html)->queries(
                 [
-                    ['query' => 'h1', 'property' => 'title', 'object' => $section , 'return' => false],
-                    ['query' => 'div[class=MCDropDownBody]', 'property' => 'text', 'object' => $section]
+                    'query' => '.MCDropDownBody.dropDownBody',
+                    'classes' => [
+                                [
+                                    'name' => '\Showcase\Models\Section',
+                                    'elements' => [
+                                        'queries' => [
+                                            ['query' => 'h4', 'property' => 'title']
+                                        ],
+                                        'reference_to' => true
+                                    ]
+                                ],
+                                [
+                                    'name' => '\Showcase\Models\Chapter',
+                                    'elements' => [
+                                        'queries' => [
+                                            ['query' => 'p', 'property' => 'text']
+                                        ],
+                                        'reference_from' => [
+                                            'name' => '\Showcase\Models\Section',
+                                            'reference_property' => 'title',
+                                            'property' => 'section_title'
+                                        ]
+                                    ]
+                                ]
+                    ]
                 ]
-            )->first();
-            Log::var_dump($section); // See storage/logs/
+            )->map();
+            Log::var_dump($list); // See storage/logs/
 
             /**
              * Mapper - docs
@@ -57,11 +78,10 @@ namespace Showcase\Controllers{
              * 
              * functions : 
              *  queries : set conditions and objects and queries
-             *  first : execute the queries and return an array and get first result
-             *  get: execute tje queries and return an array with all the results
+             *  map : execute the queries and return an array
              * 
              * queries keys : 
-             *  object: specify the object to save the html text to
+             *  classes: define all the objects classes and mapping details
              *  property: the property where to save the data
              *  query: simple_html_dom query, for more check manual => https://simplehtmldom.sourceforge.io/manual.htm
              *  return: if you don't the object to be included in the returned array, set this to false, it's true by default

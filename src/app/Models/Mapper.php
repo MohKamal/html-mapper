@@ -9,21 +9,13 @@ namespace  Showcase\Models{
     {
 
         protected $_html;
-        protected $_list_obj;
         protected $_conditions;
 
-        protected $_one_object;
-        protected $_list_of_objects;
-        protected $_concatenate;
 
         /**
          * Init the model
          */
         public function __construct(){
-            $this->_list_obj = [];
-            $this->_one_object = false;
-            $this->_list_of_objects = false;
-            $this->_concatenate = false;
         }
         
         public static function html($html) {
@@ -37,51 +29,80 @@ namespace  Showcase\Models{
             return $this;
         }
 
-        public function first() {
+        public function map() {
             $list_objs = [];
-            foreach($this->_conditions as $condition) {
-                $results = $this->_html->find($condition['query']);
-                if (is_array($results)) {
-                    $concat = key_exists('concatenate', $condition) ? $condition['concatenate'] : false;
-                    if (filter_var($concat, FILTER_VALIDATE_BOOLEAN)) {
-                        foreach ($results as $res) {
-                            $condition['object']->{$condition['property']} .= $res->plaintext;
+            $html_object = $this->_html->find($this->_conditions['query']);
+            $references = [];
+            foreach($html_object as $_html) {
+                foreach($this->_conditions['classes'] as $class) {
+                    $_class = $class['name'];
+                    $obj = new $_class;
+                    foreach($class['elements']['queries'] as $query) {
+                        if(is_array($query)) {
+                            $results = $_html->find($query['query']);
+                            if($results) {
+                                $index = 0;
+                                foreach($results as $res) {
+                                    $concatenate = false;
+                                    $exist_for_concatenation = false;
+                                    if(key_exists('concatenate', $query)){
+                                        $concatenate = filter_var($query['concatenate'], FILTER_VALIDATE_BOOLEAN);
+                                    }
+
+                                    if(!$concatenate) {
+                                        $obj = new $_class;
+                                        $obj->{$query['property']} = $res->plaintext;
+                                    } else {
+                                        $obj = $this->getObject($list_objs, $_class);
+                                        if(is_null($obj))
+                                            $obj = new $_class;
+                                        else
+                                            $exist_for_concatenation = true;
+                                        $obj->{$query['property']} .= $res->plaintext;
+                                    }
+
+                                    if(key_exists('reference_to', $class['elements']))
+                                    {
+                                        if (filter_var($class['elements']['reference_to'], FILTER_VALIDATE_BOOLEAN)) {
+                                            $references = ['name' => $_class, 'object' => $obj];
+                                        }
+                                    }
+
+                                    if(key_exists('reference_from', $class['elements'])){
+                                        $element = $class['elements']['reference_from'];
+                                        /*$reference = array_filter($references, function($arr) use ($element) {
+                                            return $arr['name'] == $element['name'];
+                                        });*/
+                            
+                                        if($references['name'] === $element['name']) {
+                                            $obj->{$element['property']} = $references['object']->{$element['reference_property']};
+                                        }
+                                    }
+                                    if(!$concatenate)
+                                        $list_objs[] = $obj;
+                                    else {
+                                        if(!$exist_for_concatenation)
+                                            $list_objs[] = $obj;
+                                    }
+                                }
+                            }
+
+
                         }
-                    } else {
-                        $condition['object']->{$condition['property']} = $results[0]->plaintext;
                     }
                 }
-                else
-                    $condition['object']->{$condition['property']} = $results->plaintext;
-
-                $return = key_exists('return', $condition) ? $condition['return'] : true;
-                if(filter_var($return, FILTER_VALIDATE_BOOLEAN))
-                    $list_objs[] = $condition['object'];
             }
-
             return $list_objs;
         }
 
-        public function get() {
-            $list_objs = [];
-            foreach($this->_conditions as $condition) {
-                $class = $condition['class'];
-                $obj = new $class;
-                $results = $this->_html->find($condition['query']);
-                if (is_array($results)) {
-                    foreach ($results as $res) {
-                        $obj->{$condition['property']} .= $res->plaintext;
-                    }
-                }
-                else
-                    $obj->{$condition['property']} = $results->plaintext;
+        private function getObject($list, $class) {
 
-                $return = key_exists('return', $condition) ? $condition['return'] : true;
-                if(filter_var($return, FILTER_VALIDATE_BOOLEAN))
-                    $list_objs[] = $obj;
+            foreach($list as $obj) {
+                if(is_a($obj, $class))
+                    return $obj;
             }
-
-            return $list_objs;
+            
+            return null;
         }
 
     }
