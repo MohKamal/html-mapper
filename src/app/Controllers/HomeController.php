@@ -21,10 +21,10 @@ namespace Showcase\Controllers{
             /**
              * Concept:
              * 
-             * The mapper is used to to map html elements to your objects
+             * The mapper is used to to map html options to your objects
              * Example :
              * Section has title and text | Section [title, text]
-             * and we want the h1 element text to be saved to the title property and all the p elements text to be saved to the text property
+             * and we want the h1 element text to be saved to the title property and all the p options text to be saved to the text property
              * so we tell the mapper : 
              *             1) <h1> ======> Section->title
              *             2) all the <p> ======> Section->text
@@ -40,13 +40,15 @@ namespace Showcase\Controllers{
             // Get the value of h1 in html and save it into the section title $section->title, first() is used to get the first h1 text
             $list = Mapper::html($html)->queries(
                 [
-                    'query' => '.MCDropDownBody.dropDownBody',
+                    'query' => '.first_div',
                     'classes' => [
                                 [
                                     'name' => '\Showcase\Models\Section',
                                     'options' => [
                                         'queries' => [
-                                            ['query' => 'h4', 'property' => 'title']
+                                            //['query' => 'h4', 'property' => 'title'],
+                                            ['query' => function($html) { return [$html->find('h1', 0)];}, 'property' => 'title'],
+                                            ['query' => function($html) { return [$html->find('p', 0)];}, 'property' => 'text']
                                         ],
                                         'reference_to' => true
                                     ]
@@ -55,13 +57,19 @@ namespace Showcase\Controllers{
                                     'name' => '\Showcase\Models\Chapter',
                                     'options' => [
                                         'queries' => [
-                                            ['query' => 'p', 'property' => 'text']
+                                            ['query' => '.MCDropDownBody.dropDownBody', 'sub' => 
+                                                [
+                                                    ['query' => 'h4', 'property' => 'title'],
+                                                    ['query' => 'p', 'property' => 'text']
+                                                ]
+                                            ]
                                         ],
                                         'reference_from' => [
                                             'name' => '\Showcase\Models\Section',
                                             'reference_property' => 'title',
                                             'property' => 'section_title'
-                                        ]
+                                        ],
+                                        'multiple' => true,
                                     ]
                                 ]
                     ]
@@ -78,17 +86,16 @@ namespace Showcase\Controllers{
              * 
              * functions : 
              *  queries : set conditions and objects and queries
-             *  map : execute the queries and return an array
+             *  first : execute the queries and return an array and get first result
+             *  get: execute tje queries and return an array with all the results
              * 
              * queries keys : 
-             *  classes: define all the objects classes and mapping details
+             *  object: specify the object to save the html text to
              *  property: the property where to save the data
-             *  name: full namespace with the class name
-             *  options: options for the class
              *  query: simple_html_dom query, for more check manual => https://simplehtmldom.sourceforge.io/manual.htm
+             *  return: if you don't the object to be included in the returned array, set this to false, it's true by default
              *  concatenate: if you want to concatenate all the results in one property, set this to true, it's false by default
-             *  reference_to: this is in the options, if you want another object to reference to this object, set this to true
-             *  reference_from: this is in the options, if you want to reference this object to another object set, the "name" of the other object (full namespace), this object "property" and the "reference_property" the other object property
+             * 
              */
             return self::response()->view('App/welcome');
         }
