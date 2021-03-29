@@ -4,10 +4,10 @@ namespace  Showcase\Models{
 
     use \Exception;
     use \Showcase\Framework\IO\Debug\Log;
+    use \Showcase\Framework\IO\Storage\Storage;
     
     class Mapper
     {
-
         protected $_html; // current html page as string
         protected $_conditions; // current queries to map with
         protected $references; // current reference_to objects
@@ -90,6 +90,33 @@ namespace  Showcase\Models{
                     }
                 }
             }
+
+            // Check for links
+            if(key_exists('links', $this->_conditions)) {
+                // if the user set query for links to follow get the html nodes
+                $links = $this->executeMapping($this->_conditions['links']['queries'], $this->_html);
+                // if there is any nodes continue
+                if(key_exists(0, $links)) {
+                    // loop into the nodes of the links
+                    foreach($links[0]['url'] as $link) {
+                        $attr = "href";
+                        if(key_exists('attr', $this->_conditions['links']))
+                            $attr = $this->_conditions['links']['attr'];
+                        // get the correct path to the local file, with the specified attribute
+                        $url = str_replace("../", "", $link->$attr);
+                        // read the html from the file
+                        $new_html = Storage::folder('app')->get($url);
+                        // convert the html (string) to simple_html_dom (object)
+                        $this->_html = str_get_html($new_html);
+                        // repeat the mapping process and get the objects from the other page
+                        $list_object = $this->map();
+                        // add the objects to the right key
+                        foreach($list_object as $name => $obj) {
+                            $list_objs[$name][] = $obj;
+                        }
+                    }
+                }
+            }
             // return the list of objects
             return $list_objs;
         }
@@ -158,8 +185,9 @@ namespace  Showcase\Models{
             $obj = new $class;
             // loop into the nodes
             foreach($blocks as $property => $node) {
-                foreach($node as $n)
+                foreach($node as $n) {
                     $obj->{$property} .= $n->plaintext; // set object properties with the values
+                }
             }
             // return the object
             return $obj;
@@ -198,8 +226,9 @@ namespace  Showcase\Models{
                             // loop into the nodes
                             for($k=0; $k<count($nodes); $k++){
                                 // if the nodes is not null, continue
-                                if(!is_null($nodes[$k]))
+                                if(!is_null($nodes[$k])) {
                                     $obj->{$property} .= $nodes[$k]->plaintext; // set the value of the property to the object
+                                }
                             }
                         }
                     }

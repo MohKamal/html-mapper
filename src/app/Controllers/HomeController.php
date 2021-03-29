@@ -101,6 +101,15 @@ namespace Showcase\Controllers{
                                         'multiple' => true,
                                     ]
                                 ]
+                    ],
+                    'links' => [
+                        'attr' => 'href',
+                        'queries' => [
+                            ['query' => 'ul.topics-list', 'sub' => [
+                                    ['query' => 'li a', 'property' => 'url']
+                                ] 
+                            ]
+                        ]
                     ]
                 ]
             )->map();
@@ -127,6 +136,7 @@ namespace Showcase\Controllers{
              *          </div>
              *  Ower main query would be to select the main div and then set the objects queries to specify the properties: 'query' => 'div[id=main]
              *  classes: this key regroup all the objects mappers, with their queries and other options
+             *  links: if you need to do the same mapping on other pages, that they links are in the current page us the links queries
              * 
              * classes keys:
              *  name: the name of the object, full namespace. Example \Showcase\Models\Model
@@ -165,9 +175,16 @@ namespace Showcase\Controllers{
              *          Example:
              *          ['query' => function($html) { return [$html->find('h1', 0)];}, 'property' => 'title']
              *              => Get the first h1 in the main node of the main query
+             * 
+             *  links keys:
+             *      attr: the links can be an a element, by default the href attribute will be called, but if your links are in other element types, you can specify the attr
+             *          Example:   
+             *              p element: 'attr' => 'plaintext' | <p data-link="url">some text</p> => 'attr' => 'data-link'
+             *      queries: the same concept as before, define the queries where your elements with links exists, to be retrevied!
              *  
              */
             return self::response()->view('App/welcome');
         }
     }
 }
+
